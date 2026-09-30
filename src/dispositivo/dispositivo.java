@@ -1,28 +1,28 @@
 package dispositivo;
 
-class dispositivo {
+public class Dispositivo {
+    public String nombre;
     String tipo;
     public boolean activo;
-
-    static class detalleNombre {
-        public String primero;
-        public String segundo;
+    public void mostrarinformacion(){
+        System.out.println("Nombre: "+nombre);
+        System.out.println("tipo: "+tipo);
+        System.out.println("Activo: "+activo);
     }
+    public void activar(){
+        if (activo==false){
+            activo=true;
+            System.out.println(nombre + "ha sido activado.");
 
-    public detalleNombre nombre = new detalleNombre();
-
-    public void asignardatos() {
-        nombre.primero = "Mateo";
-        nombre.segundo = "Salgado";
-
+        }
     }
-
-    public void mostrarinformacion() {
-        System.out.println("El primer nombre es " + nombre.primero + " y el segundo nombre es " + nombre.segundo);
+    void mostrarestado(){
+        String estado = activo?"esta activo":"esta inactivo";
+        System.out.println(nombre + " "+estado);
     }
-
 
 
 }
+
 
 
