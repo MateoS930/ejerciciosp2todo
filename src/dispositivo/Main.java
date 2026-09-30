@@ -1,19 +1,20 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-
-
 package dispositivo;
 
-public class Main {
-    public static void main(String[] args) {
-        // Creamos el objeto de tu otra clase
-        dispositivo miDispositivo = new dispositivo();
-
-        // Llamamos a los métodos que diseñaste
-        miDispositivo.asignardatos();
-        miDispositivo.mostrarinformacion();
+public class main {
+    public static void main(String[] args){
+        Dispositivo dispositivo1 = new Dispositivo();
+        Dispositivo dispositivo2 = new Dispositivo();
+        dispositivo1.nombre= "celular";
+        dispositivo1.tipo="electrodomestico";
+        dispositivo1.activo=false;
+        dispositivo2.nombre="Laptop";
+        dispositivo2.tipo="Tecnologia";
+        dispositivo2.activo=false;
+        dispositivo1.mostrarinformacion();
+        dispositivo2.mostrarinformacion();
+        dispositivo1.mostrarestado();
+        dispositivo2.mostrarestado();
     }
+
+
 }
-
-
-
