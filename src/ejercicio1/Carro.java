@@ -1,8 +1,15 @@
 package ejercicio1;
 
-public class Carro {
-    private int potencia;
+ private int potencia;
     private double velocidad;
+
+
+
+    private static int numCarros = 0;
+    //Constante de clase
+    private static final double IVA= 0.15;
+
+
     public void setPotencia(int potencia){
         if (potencia <= 0) {
             this.potencia = 1;
@@ -17,6 +24,7 @@ public class Carro {
         si mis datos necesitan validacion llamo a los set*/
         setPotencia(potencia);
         setVelocidad(velocidad);
+        numCarros++;
     }
 
     public void setVelocidad(double velocidad) {
@@ -29,11 +37,19 @@ public class Carro {
     public int getPotencia(){
         return potencia;
     }
+    public static int getNumCarros(){
+        return numCarros;
+    }
 
     public double getVelocidad() {
         return velocidad;
     }
-
+    public static double getIva(){
+        return IVA;
+    }
+public double calcularPrecioVenta(double precio){
+        return precio +(precio+IVA);
+}
     public void acelerar(){velocidad+=potencia;}
     void frenar(){velocidad/=2;}
 }
