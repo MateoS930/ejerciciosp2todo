@@ -10,7 +10,9 @@ public class AppStore {
         indice = -1;
         cargarDatos();
     }
-
+/*el java no hace bien los getter y setter
+  el set no se utliza porque los datos se ingreasan a demanda
+  */
     private void cargarDatos(){
         juegos[++indice] = new Juego("Fifa2026", "deportes", 15, 45, 50);
         juegos[++indice] = new Juego("Roblox", "acción", 23, 59, 35);
