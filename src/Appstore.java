@@ -1,62 +1,98 @@
 package arreglos.tienda.modelo;
 
-public class AppStore {
-    private static final int MAX =4;
+public class AppStore {private static final int MAX = 4;
     private Juego juegos[];
     private int indice;
 
     public AppStore(){
         juegos = new Juego[MAX];
         indice = -1;
-        cargarDatos();
     }
-/*el java no hace bien los getter y setter
-  el set no se utliza porque los datos se ingreasan a demanda
-  */
-    private void cargarDatos(){
-        juegos[++indice] = new Juego("Fifa2026", "deportes", 15, 45, 50);
-        juegos[++indice] = new Juego("Roblox", "acción", 23, 59, 35);
+    public void cargarDatos(){
+        //invocar como si fuera un void pq no quiero mostrar ningun mensaje de si tuvo
+        //éxito o no
+        agregarJuego(new Juego("Fifa2026","Deportes",15,15,50));
+        agregarJuego(new Juego("Roblox","Acción",50,35,30));
     }
 
     public Juego[] getJuegos() {
         return juegos;
     }
 
-    public void agregarJuegos(Juego j) {// en vez del set
-        if(j != null && indice < MAX-1){
-            juegos[++indice] = j;
-        }
+    public int getIndice() {
+        return indice;
     }
+    /* El set no se utiliza porque los datos se ingresan a demanda
+    public void setJuegos(Juego juegos[]) {
+        this.juegos = juegos;
+    }
+    */
+
+    public boolean agregarJuego(Juego j){
+        if(j != null && indice < MAX - 1){
+            juegos[++indice] = j;
+            return true;
+        }
+        return false;
+    }
+   /* public void agregarJuegoEx(Juego j){
+        if(j != null && indice < MAX - 1){
+            juegos[++indice] = j;
+            return;
+        }
+        throw new ArrayIndexOutOfBoundsException("No existe espacio");
+    }*/
+
     public Juego buscarJuego(String nombre){
-        for(int i = 0; i < MAX; i++){
-            if (juegos[i].getNombre().equalsIgnoreCase(nombre)){
-                return juegos[i];
+        if(nombre != null && !nombre.trim().isEmpty()){
+            for(int i = 0; i <= indice; i++){
+                if(juegos[i].getNombre().equalsIgnoreCase(nombre)){
+                    return juegos[i];
+                }
             }
         }
         return null;
     }
     public boolean comprar(String nombre, int cantidad){
-        Juego j1 = buscarJuego(nombre);
-        if (j1 != null){
-            return j1.comprar(cantidad);
+        if(nombre != null && !nombre.trim().isEmpty() && cantidad > 0){
+            Juego j = buscarJuego(nombre);
+            if(j != null){
+                return j.comprar(cantidad);
+            }
         }
         return false;
     }
+
     public double vender(String nombre, int cantidad){
-        Juego j1 = buscarJuego(nombre);
-        if (j1 != null){
-            if (j1.vender(cantidad)){
-                return cantidad * j1.getPrecio();
+        //no voy a comprobar los parámetros pq el buscar ya lo hace y el
+        //vender de juego tbn
+        Juego j = buscarJuego(nombre);
+        if(j != null){
+            if (j.vender(cantidad)) {
+
+                return j.getPrecio() * cantidad;
             }
         }
         return 0;
     }
-    public String sacarJuegos(){
-        String juegoS = "";
-        for (int i = 0; i < indice; i++){
-            juegoS += juegos[i];
-            juegoS += "\n";
+    public String masVendido(){
+        String nombre = "";
+        int mayor;
+        if(indice >= 0){
+            nombre = juegos[0].getNombre();
+            mayor = juegos[0].getLicenciasVendidas();
+            for(Juego j : juegos){
+                if(j != null){
+                    if(j.getLicenciasVendidas() > mayor){
+                        nombre = j.getNombre();
+                        mayor = j.getLicenciasVendidas();
+                    }
+                }else{
+                    return nombre;
+                }
+            }
+
         }
-        return !juegoS.trim().isBlank()?juegoS:"No hay juegos a mostrar";
+        return nombre;
     }
 }
